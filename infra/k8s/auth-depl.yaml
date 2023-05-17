@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: auth
-          image: neat1144/auth
+          # image: neat1144/auth
+          image: us.gcr.io/gold-optics-387009/auth
 ---
 apiVersion: v1
 kind: Service
