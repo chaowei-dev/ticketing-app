@@ -2,18 +2,18 @@
 > microservices
 
 # Design
-![design](markdown_image/design.png)
+![design](markdown/design.png)
 
 # Events
-![events](markdown_image/events.png)
+![events](markdown/events.png)
 
 # Resources
-![resources](markdown_image/resources.png)
+![resources](markdown/resources.png)
 
 # Servieces
-![services](markdown_image/services.png)
+![services](markdown/services.png)
 
 ## Auth
-![auth](markdown_image/auth.png)
+![auth](markdown/auth.png)
 
-node project -> docker config -> k8s config -> skaffold config -> ingress-nginx setup
+node project -> docker config -> k8s config -> skaffold config -> ingress-nginx config
