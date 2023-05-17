@@ -2,8 +2,8 @@ apiVersion: skaffold/v4beta5
 kind: Config
 build:
   artifacts:
-    # - image: neat1144/auth
-    - image: us.gcr.io/gold-optics-387009/auth
+    - image: neat1144/auth
+    # - image: us.gcr.io/gold-optics-387009/auth
       context: auth
       sync:
         manual:
@@ -11,10 +11,10 @@ build:
             dest: .
       docker:
         dockerfile: Dockerfile
-  # local:
-  #   push: false
-  googleCloudBuild:
-    projectId: gold-optics-387009
+  local:
+    push: false
+  # googleCloudBuild:
+    # projectId: gold-optics-387009
 manifests:
   rawYaml:
     - ./infra/k8s/*
