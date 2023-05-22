@@ -11,6 +11,17 @@ build:
             dest: .
       docker:
         dockerfile: Dockerfile
+    
+    - image: neat1144/client
+    # - image: us.gcr.io/gold-optics-387009/client
+      context: client
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
+      docker:
+        dockerfile: Dockerfile
+    
   local:
     push: false
   # googleCloudBuild:
