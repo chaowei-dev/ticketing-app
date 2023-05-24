@@ -2,7 +2,11 @@ import request from "supertest";
 import { app } from "../../app";
 
 // listening for post
-it("has a rout handler listening to /api/tickets for post request", async () => {});
+it("has a rout handler listening to /api/tickets for post request", async () => {
+  const response = await request(app).post("/api/tickets").send({});
+
+  expect(response.status).not.toEqual(404);
+});
 
 // non-signin
 it("can only be access if user is signed in", async () => {});

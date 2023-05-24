@@ -1,9 +1,9 @@
 import express from "express";
 import "express-async-errors";
 import { json } from "body-parser";
-import mongoose from "mongoose";
 import cookieSession from "cookie-session";
 import { errorHandler, NotFoundError } from "@curry-tickets/common";
+import { createTicketRouter } from "./routes/new";
 
 const app = express();
 app.set("trust proxy", true);
@@ -14,6 +14,8 @@ app.use(
     secure: process.env.NODE_ENV !== "test", // check in https, if test set false, false true
   })
 );
+
+app.use(createTicketRouter);
 
 app.all("*", async (req, res) => {
   throw new NotFoundError(); // express will catch this error and throw to middleware(errorHandler)
