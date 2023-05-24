@@ -22,6 +22,16 @@ build:
       docker:
         dockerfile: Dockerfile
     
+    - image: neat1144/tickets
+    # - image: us.gcr.io/gold-optics-387009/tickets
+      context: tickets
+      sync:
+        manual:
+          - src: src/**/*.ts
+            dest: .
+      docker:
+        dockerfile: Dockerfile
+    
   local:
     push: false
   # googleCloudBuild:

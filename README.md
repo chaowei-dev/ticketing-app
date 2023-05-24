@@ -13,7 +13,10 @@
 # Servieces
 ![services](markdown/services.png)
 
-## Auth
+## Auth Service
 ![auth](markdown/auth.png)
 
 node project -> docker config -> k8s config -> skaffold config -> ingress-nginx config
+
+## Ticket Service
+![ticket](markdown/tickets-ser.png)
