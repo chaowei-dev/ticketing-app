@@ -29,6 +29,7 @@ it("returns a 401 if the user is not authenticated", async () => {
 
 // 401 for non-own ticket
 it("returns a 401 if the user does not own the ticket", async () => {
+  // user 1
   const response = await request(app)
     .post("/api/tickets")
     .set("Cookie", global.signin())
@@ -37,6 +38,7 @@ it("returns a 401 if the user does not own the ticket", async () => {
       price: 20,
     });
 
+  // user 2
   await request(app)
     .put(`/api/tickets/${response.body.id}`)
     .set("Cookie", global.signin())
@@ -48,7 +50,69 @@ it("returns a 401 if the user does not own the ticket", async () => {
 });
 
 // 400 for invalid title or price
-it("returns a 400 if the user provides an invalid title or price", async () => {});
+it("returns a 400 if the user provides an invalid title or price", async () => {
+  // get cookie
+  const cookie = global.signin();
+
+  // craete tickets
+  const response = await request(app)
+    .post("/api/tickets")
+    .set("Cookie", cookie)
+    .send({
+      title: "asldkfj",
+      price: 20,
+    });
+
+  // invalid title
+  await request(app)
+    .put(`/api/tickets/${response.body.id}`)
+    .set("Cookie", cookie)
+    .send({
+      title: "",
+      price: 20,
+    })
+    .expect(400);
+
+  // invalid price
+  await request(app)
+    .put(`/api/tickets/${response.body.id}`)
+    .set("Cookie", cookie)
+    .send({
+      title: "afasdf",
+      price: -10,
+    })
+    .expect(400);
+});
 
 // update ticket
-it("update the ticket provided valid inputs", async () => {});
+it("update the ticket provided valid inputs", async () => {
+  // get cookie
+  const cookie = global.signin();
+
+  // craete tickets
+  const response = await request(app)
+    .post("/api/tickets")
+    .set("Cookie", cookie)
+    .send({
+      title: "asldkfj",
+      price: 20,
+    });
+
+  // update ticket
+  await request(app)
+    .put(`/api/tickets/${response.body.id}`)
+    .set("Cookie", cookie)
+    .send({
+      title: "new title",
+      price: 100,
+    })
+    .expect(200);
+
+  // retrieve updated ticket
+  const ticketResponse = await request(app)
+    .get(`/api/tickets/${response.body.id}`)
+    .send();
+
+  expect(ticketResponse.body.title).toEqual("new title");
+  expect(ticketResponse.body.price).toEqual(100);
+});
