@@ -3,6 +3,7 @@ import { randomBytes } from "crypto";
 
 console.clear();
 
+// random id
 const stan = nats.connect("ticketing", randomBytes(4).toString("hex"), {
   url: "http://localhost:4222",
 });
@@ -10,7 +11,10 @@ const stan = nats.connect("ticketing", randomBytes(4).toString("hex"), {
 stan.on("connect", () => {
   console.log("Listener connected to NATS");
 
-  const subsrciption = stan.subscribe("ticket:created");
+  const subsrciption = stan.subscribe(
+    "ticket:created",
+    "orders-service-queue-group"
+  );
 
   subsrciption.on("message", (msg: Message) => {
     const data = msg.getData();
